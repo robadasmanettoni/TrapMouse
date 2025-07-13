@@ -1,0 +1,104 @@
+#include <windows.h>
+#include "resource.h"
+
+// Icona principale del programma
+IDI_MYICON ICON "icon.ico"
+
+// Finestra di dialogo per settare una nuova password
+IDD_PASSWORD_DIALOG DIALOGEX 10, 10, 240, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Imposta nuova password"
+FONT 8, "Segoe UI"
+BEGIN
+    LTEXT           "Vecchia password:", -1, 10, 10, 90, 10
+    EDITTEXT        IDC_EDIT_OLD_PASSWORD, 110, 8, 110, 14, ES_PASSWORD | WS_BORDER | WS_TABSTOP
+
+    LTEXT           "Nuova password:", -1, 10, 30, 90, 10
+    EDITTEXT        IDC_EDIT_NEW_PASSWORD, 110, 28, 110, 14, ES_PASSWORD | WS_BORDER | WS_TABSTOP
+
+    LTEXT           "Conferma nuova:", -1, 10, 50, 90, 10
+    EDITTEXT        IDC_EDIT_CONFIRM, 110, 48, 110, 14, ES_PASSWORD | WS_BORDER | WS_TABSTOP
+
+    DEFPUSHBUTTON   "Salva", IDC_BUTTON_SAVE, 80, 76, 80, 16
+END
+
+// Finestra di dialogo Impostazioni
+IDD_SETTINGS_DIALOG DIALOGEX 10, 10, 240, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Impostazioni"
+FONT 8, "Segoe UI"
+BEGIN
+    CONTROL "Avvio automatico (con blocco mouse)", IDC_CHK_AUTOLOCK,  "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 10, 10, 240, 12
+    CONTROL "Blocca combinazioni di sistema",      IDC_CHK_BLOCKKEYS, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 10, 28, 240, 12
+    CONTROL "Ignora restrizioni sulla password",   IDC_CHK_PASS_EASY, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 10, 46, 240, 12
+
+    LTEXT  "Cifrario da utilizzare:", -1, 10, 66, 100, 8
+    COMBOBOX IDC_COMBO_CIPHER, 85, 64, 100, 50, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    CONTROL "Centrata sullo schermo", IDC_RADIO_CENTER, "Button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 10, 84, 120, 10
+    CONTROL "Posizione manuale",      IDC_RADIO_CUSTOM, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 120, 84, 120, 10
+
+    DEFPUSHBUTTON "OK",     IDC_BTN_OK,      50, 106, 60, 14
+    PUSHBUTTON    "Annulla",IDC_BTN_CANCEL, 130, 106, 60, 14
+END
+
+// Informazioni di versione (visibili nelle proprietà del file .exe)
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,15,0    // v1.0 build 15
+ PRODUCTVERSION 1,0,0,0  // Versione del prodotto
+ FILEFLAGSMASK 0x3fL     // Tutti i flag possibili abilitati
+ FILEFLAGS 0x0L          // Nessun flag attivo (build normale)
+ FILEOS 0x4L             // Target: Windows 32-bit
+ FILETYPE 0x1L           // È un'applicazione .exe
+ FILESUBTYPE 0x0L        // Non usato per .exe
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041004B0" // Lingua + Codifica (ita + unicode)
+        BEGIN
+            VALUE "CompanyName",      "Lui Francesco"
+            VALUE "FileDescription",  "Blocco temporaneo del mouse con password"
+            VALUE "FileVersion",      "1.0.15.0"
+            VALUE "InternalName",     "TrapMouse"
+            VALUE "OriginalFilename", "TrapMouse.exe"
+            VALUE "ProductName",      "TrapMouse"
+            VALUE "ProductVersion",   "1.0.0.0"
+            VALUE "LegalCopyright",   "© 2024 Francesco"
+            VALUE "LegalTrademarks",  "-"
+            VALUE "Comments",         "Software per uso personale"
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0410, 1200  // Lingua: Italiano, Code page: Unicode
+    END
+END
+
+// Stringhe localizzate in italiano (default)
+STRINGTABLE
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+BEGIN
+    IDS_MSG_PASSWORD_OK   "La password è corretta!"
+    IDS_MSG_PASSWORD_ERR  "La password è sbagliata!"
+    IDS_TITLE_SUCCESS     "SUCCESSO"
+    IDS_TITLE_ERROR       "ERRORE"
+    IDS_BUTTON_LOCK       "Cattura!"
+    IDS_BUTTON_UNLOCK     "Sblocca!"
+    IDS_LABEL_PASSWORD    "Password:"
+    IDS_SHOW_PASSWORD     "Mostra password"
+END
+
+// Stringhe localizzate in inglese
+STRINGTABLE
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+BEGIN
+    IDS_MSG_PASSWORD_OK   "Password is correct!"
+    IDS_MSG_PASSWORD_ERR  "Password is incorrect!"
+    IDS_TITLE_SUCCESS     "SUCCESS"
+    IDS_TITLE_ERROR       "ERROR"
+    IDS_BUTTON_LOCK       "Lock!"
+    IDS_BUTTON_UNLOCK     "Unlock!"
+    IDS_LABEL_PASSWORD    "Password:"
+    IDS_SHOW_PASSWORD     "Show password"
+END
