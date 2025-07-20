@@ -102,3 +102,4 @@ BEGIN
     IDS_LABEL_PASSWORD    "Password:"
     IDS_SHOW_PASSWORD     "Show password"
 END
+

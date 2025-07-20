@@ -12,3 +12,4 @@ bool SavePassword_SALSA20(const char* plaintext, std::vector<unsigned char>& out
 bool LoadPassword_SALSA20(const std::string& base64, char* out, size_t outSize);
 
 #endif
+

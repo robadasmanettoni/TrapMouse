@@ -39,3 +39,4 @@ void UninstallKeyBlocker() {
         g_hKeyboardHook = NULL;
     }
 }
+

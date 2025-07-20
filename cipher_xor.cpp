@@ -60,3 +60,4 @@ bool LoadPassword_XOR(const std::string& base64, char* out, size_t outSize) {
 
     return true;
 }
+

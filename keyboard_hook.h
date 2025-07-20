@@ -6,3 +6,4 @@ bool InstallKeyBlocker();
 
 // Rimuove l’hook
 void UninstallKeyBlocker();
+

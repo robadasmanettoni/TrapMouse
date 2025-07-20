@@ -12,3 +12,4 @@ bool SavePassword_XOR(const char* plaintext, std::vector<unsigned char>& out);
 bool LoadPassword_XOR(const std::string& base64, char* out, size_t outSize);
 
 #endif
+

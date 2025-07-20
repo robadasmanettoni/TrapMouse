@@ -32,3 +32,4 @@
 #define IDC_BTN_CANCEL         409
 
 #endif
+

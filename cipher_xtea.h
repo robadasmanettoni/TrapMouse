@@ -12,3 +12,4 @@ bool SavePassword_XTEA(const char* plaintext, std::vector<unsigned char>& out);
 bool LoadPassword_XTEA(const std::string& base64, char* out, size_t outSize);
 
 #endif
+

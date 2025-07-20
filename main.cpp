@@ -1,7 +1,7 @@
-ï»¿// ====================================================================
+// ====================================================================
 // Indice delle funzioni:
 // ====================================================================
-// CaptureMouse   : Blocca o sblocca il cursore del mouse nellâ€™area di cattura.
+// CaptureMouse   : Blocca o sblocca il cursore del mouse nell’area di cattura.
 // WndProc        : Gestisce i messaggi della finestra principale (creazione UI, comandi, chiusura condizionata, ecc.).
 // WinMain        : Punto di ingresso, registra la classe finestra e avvia il ciclo dei messaggi.
 // ====================================================================
@@ -40,14 +40,14 @@ HFONT hFont;                     // Font personalizzato per i controlli
 RECT labelRect;                  // Area di cattura per il mouse (definita dal rettangolo di hwndCaptureAreaLabel)
 
 static Settings settings;
-bool isMouseCaptured = false;    // Flag utilizzato per indicare se il mouse Ã¨ attualmente bloccato
+bool isMouseCaptured = false;    // Flag utilizzato per indicare se il mouse è attualmente bloccato
 bool isShowPassChecked = false;  // Flag relativo allo stato del checkbox "Mostra password"
 
 bool isPasswordSet() {
     Settings s;
     if (!LoadSettings(s)) return false;
 
-    // Se la password Ã¨ vuota, non Ã¨ stata impostata
+    // Se la password è vuota, non è stata impostata
     return !s.passwordEncrypted.empty();
 }
 
@@ -191,7 +191,7 @@ INT_PTR CALLBACK SettingsDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                         // Ottiene l'indice della voce selezionata
                         int sel = (int)SendMessage(hCombo, CB_GETCURSEL, 0, 0);
                     
-                        // Se la selezione Ã¨ valida (tra 0 e 2) aggiorno il cifrario
+                        // Se la selezione è valida (tra 0 e 2) aggiorno il cifrario
                         if (sel >= 0 && sel <= 2) {
                             settings.cipher = sel;
                         } else {
@@ -200,7 +200,7 @@ INT_PTR CALLBACK SettingsDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                         }
                     }
 	                
-                    // 4) Se c'Ã¨ una password salvata e il cifrario Ã¨ stato cambiato, ricodifichiamo!
+                    // 4) Se c'è una password salvata e il cifrario è stato cambiato, ricodifichiamo!
                     if (isPasswordSet() && settings.cipher != oldCipher) {
                         char decrypted[MAX_PASSWORD_LEN] = {};
                         bool ok = false;
@@ -261,7 +261,7 @@ INT_PTR CALLBACK SettingsDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 
         case WM_SYSCOMMAND:
             if ((wParam & 0xFFF0) == SC_CLOSE) {
-                EndDialog(hDlg, IDCANCEL); // Come se lâ€™utente avesse premuto Annulla
+                EndDialog(hDlg, IDCANCEL); // Come se l’utente avesse premuto Annulla
                 return TRUE;
             }
             break;
@@ -313,13 +313,13 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 				    	SecureZeroMemory(newPass, sizeof(newPass));
                         SecureZeroMemory(confirm, sizeof(confirm));
                         SecureZeroMemory(oldPass, sizeof(oldPass));
-                        MsgTipsBox("La password Ã¨ troppo corta, inserisci almeno 6 caratteri.", LoadIcon(NULL, IDI_ERROR));
+                        MsgTipsBox("La password è troppo corta, inserisci almeno 6 caratteri.", LoadIcon(NULL, IDI_ERROR));
                         return TRUE;
                     } else if (len > MAX_PASSWORD_INPUT) {
 				    	SecureZeroMemory(newPass, sizeof(newPass));
                         SecureZeroMemory(confirm, sizeof(confirm));
                         SecureZeroMemory(oldPass, sizeof(oldPass));
-                        MsgTipsBox("La password Ã¨ troppo lunga, il limite massimo Ã¨ 100 caratteri.", LoadIcon(NULL, IDI_ERROR));
+                        MsgTipsBox("La password è troppo lunga, il limite massimo è 100 caratteri.", LoadIcon(NULL, IDI_ERROR));
                         return TRUE;
                     }
 
@@ -328,7 +328,7 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                         SecureZeroMemory(newPass, sizeof(newPass));
                         SecureZeroMemory(confirm, sizeof(confirm));
                         SecureZeroMemory(oldPass, sizeof(oldPass));
-                        MsgTipsBox("La nuova password non puÃ² essere uguale a quella attuale.", LoadIcon(NULL, IDI_WARNING));
+                        MsgTipsBox("La nuova password non può essere uguale a quella attuale.", LoadIcon(NULL, IDI_WARNING));
                         return TRUE;
                     }
 				}
@@ -338,7 +338,7 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                     SecureZeroMemory(newPass, sizeof(newPass));
                     SecureZeroMemory(confirm, sizeof(confirm));
                     SecureZeroMemory(oldPass, sizeof(oldPass));
-                    MsgTipsBox("La nuova password non puÃ² essere vuota.", LoadIcon(NULL, IDI_ERROR));
+                    MsgTipsBox("La nuova password non può essere vuota.", LoadIcon(NULL, IDI_ERROR));
                     return TRUE;
                 }
 
@@ -361,7 +361,7 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                 char decrypted[MAX_PASSWORD_LEN] = {};
                 bool ok = true;
                 
-                // Se esiste giÃ  una password la decifriamo e verifichiamo
+                // Se esiste già una password la decifriamo e verifichiamo
                 if (requireOld) {
                     switch (s.cipher) {
                         case 0: ok = LoadPassword_XOR(s.passwordEncrypted, decrypted, sizeof(decrypted)); break;
@@ -378,7 +378,7 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
                     }
                 
                     if (strcmp(oldPass, decrypted) != 0) {
-                        MsgTipsBox("La password attuale non Ã¨ corretta!", LoadIcon(NULL, IDI_ERROR));
+                        MsgTipsBox("La password attuale non è corretta!", LoadIcon(NULL, IDI_ERROR));
                         return TRUE;
                     }
                 }
@@ -426,7 +426,7 @@ INT_PTR CALLBACK PasswordDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 
 // ---------------------------------------------------------------------------------------
 // SEZIONE: Funzione CaptureMouse
-// DESCRIZIONE: Blocca o sblocca il cursore del mouse nellâ€™area di cattura
+// DESCRIZIONE: Blocca o sblocca il cursore del mouse nell’area di cattura
 // ---------------------------------------------------------------------------------------
 void CaptureMouse(HWND hwnd, bool& isMouseCaptured, RECT& labelRect) { 
 	static int originalAutolock = 0;
@@ -434,7 +434,7 @@ void CaptureMouse(HWND hwnd, bool& isMouseCaptured, RECT& labelRect) {
     if (!isMouseCaptured) {
         // Verifica esistenza file password
         if (!isPasswordSet()) {
-            MsgTipsBox("La password non Ã¨ stata ancora impostata. Impostala per usare il blocco.", LoadIcon(NULL, IDI_INFORMATION));
+            MsgTipsBox("La password non è stata ancora impostata. Impostala per usare il blocco.", LoadIcon(NULL, IDI_INFORMATION));
             DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_PASSWORD_DIALOG), hwnd, PasswordDlgProc);
             return; // esci, l'utente deve impostarla prima
         }
@@ -514,9 +514,9 @@ void CaptureMouse(HWND hwnd, bool& isMouseCaptured, RECT& labelRect) {
 
 				settings.autolock = originalAutolock;
 				SaveSettings(settings);
-                MsgTipsBox("La password Ã¨ corretta!", LoadIcon(NULL, IDI_INFORMATION));
+                MsgTipsBox("La password è corretta!", LoadIcon(NULL, IDI_INFORMATION));
             } else {
-                MsgTipsBox("La password Ã¨ sbagliata!", LoadIcon(NULL, IDI_ERROR));
+                MsgTipsBox("La password è sbagliata!", LoadIcon(NULL, IDI_ERROR));
             }
 
             SecureZeroMemory(decodedPassword, sizeof(decodedPassword));
@@ -593,7 +593,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			SetWindowPos(hwndTipsLabel, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 			SendMessage(hwndTipsLabel, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-            // Mostra un tip iniziale allâ€™avvio
+            // Mostra un tip iniziale all’avvio
             ShowStartupTip();
 
             break;
@@ -641,7 +641,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
                     break;
 	        
                 case 5: // BTN_PASSWORD = hwndPasswordButton
-                    // Qui andrÃ  la logica per impostare/salvare la password
+                    // Qui andrà la logica per impostare/salvare la password
                     DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_PASSWORD_DIALOG), hwnd, PasswordDlgProc);
                     break;
 				case 6: // hwndSettingsButton
@@ -676,7 +676,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
         }
 
         case WM_SETCURSOR: {
-            // Imposta il cursore a freccia quando Ã¨ sopra l'area hwndCaptureAreaLabel (facoltativo)
+            // Imposta il cursore a freccia quando è sopra l'area hwndCaptureAreaLabel (facoltativo)
             if (hwnd == hwndCaptureAreaLabel && isMouseCaptured) {
                 SetCursor(LoadCursor(NULL, IDC_ARROW));
                 return TRUE;
@@ -685,9 +685,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
         }
 
         case WM_CLOSE: {
-            // Blocca la chiusura se il mouse Ã¨ catturato
+            // Blocca la chiusura se il mouse è catturato
             if (isMouseCaptured) {
-                MsgTipsBox("ATTENZIONE: Non puoi chiudere la finestra finchÃ© il blocco Ã¨ attivo.\nInserisci la password per sbloccare.", LoadIcon(NULL, IDI_WARNING));
+                MsgTipsBox("ATTENZIONE: Non puoi chiudere la finestra finché il blocco è attivo.\nInserisci la password per sbloccare.", LoadIcon(NULL, IDI_WARNING));
             } else {
                 DestroyWindow(hwnd);
             }
@@ -711,8 +711,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     // Verifica se il file data.cfg esiste, altrimenti richiedi la creazione della password
     // Inizializzazione file di configurazione con valori di default
-	FILE* f = NULL;
-	fopen_s(&f, "data.cfg", "r");
+	FILE* f = fopen("data.cfg", "r");
     if (!f) {
         // Password cifrata base64 di stringa vuota
         settings.autolock          = 0;
@@ -799,3 +798,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
     return msg.wParam;
 }
+

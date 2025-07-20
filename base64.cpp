@@ -59,3 +59,4 @@ std::string DecodeBase64(const std::string& encoded, std::vector<unsigned char>&
 
     return std::string(out.begin(), out.end());
 }
+
