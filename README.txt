@@ -46,5 +46,3 @@ SICUREZZA:
 LICENZA:
 Questo software è distribuito con licenza MIT, è possibile usarlo, copiarlo, modificarlo 
 e distribuirlo liberamente, anche in progetti commerciali.
-
-Contatti: robadasmanettoni [at] github
